@@ -3,10 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const AddCourse = () => {
-  const { data: session } = useSession(); 
-  const userId = session?.user?.id; 
-
+const AddCourse = ({ userId }) => {
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
@@ -144,7 +141,7 @@ const AddCourse = () => {
           </button>
 
           <button
-            onClick={() => router.push("/study-materials")}
+            onClick={() => router.push("/materials")}
             className="w-full sm:w-auto bg-purple-500 text-white py-2 px-6 rounded-lg hover:bg-purple-600 transition ease-in-out duration-300"
           >
             View Study Materials

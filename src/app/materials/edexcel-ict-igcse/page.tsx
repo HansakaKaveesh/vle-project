@@ -9,6 +9,7 @@ import { Button } from "../../components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
 import { RadioGroup, RadioGroupItem } from "../../components/ui/radio-group";
 import { Label } from "../../components/ui/label";
+import { FaDesktop, FaServer, FaMicrochip, FaCogs, FaLaptop } from 'react-icons/fa'; // Import icons from react-icons
 
 const mcqQuestions = [
 
@@ -292,21 +293,23 @@ export default function Home() {
             
             
             {/* Chapter 1: DIGITAL DEVICES */}
-            <div className="flex items-start gap-4 p-4 bg-secondary/50 rounded-lg">
-            <Book className="w-5 h-5 mt-1 text-primary" />
-            <div>
-              <h4 className="font-medium">CHAPTER 1: DIGITAL DEVICES</h4>
-              <p className="text-sm text-muted-foreground mt-1">
-                Understanding various types of digital devices.
-              </p>
-              <div className="mt-4 p-4 bg-primary/10 rounded-lg">
-                <h5 className="font-medium text-primary">Study Note:</h5>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Digital devices play a vital role in modern technology. It’s essential to understand the different types and their functions for better application in various fields.
-                </p>
-              </div>
-            </div>
-          </div>
+            <div className="flex items-start gap-6 p-6 bg-white shadow-lg rounded-lg hover:shadow-2xl transition-shadow duration-300">
+  <Book className="w-6 h-6 text-primary mt-1" />
+
+  <div>
+    <h4 className="text-2xl font-semibold text-primary mb-2">CHAPTER 1: DIGITAL DEVICES</h4>
+    <p className="text-sm text-muted-foreground mt-1 mb-4">
+      Understanding various types of digital devices.
+    </p>
+    
+    <div className="mt-6 p-6 bg-primary/10 rounded-lg shadow-md">
+      <h5 className="text-lg font-semibold text-primary">Study Note:</h5>
+      <p className="text-sm text-muted-foreground mt-2">
+        Digital devices play a vital role in modern technology. It’s essential to understand the different types and their functions for better application in various fields.
+      </p>
+    </div>
+  </div>
+</div>
 
 
 
@@ -314,234 +317,283 @@ export default function Home() {
            <div className="flex items-start gap-4 p-4 bg-secondary/50 rounded-lg">
   <Book className="w-5 h-5 mt-1 text-primary" />
   <div>
-    <h4 className="font-medium">1. Computers</h4>
-    <div>
+  <h4 className="text-2xl font-medium text-primary mb-6">1. Computers</h4>
+<div className="bg-white shadow-lg rounded-lg overflow-hidden">
   <img
-    src="/notes/Computers1.jpg"
+    src="https://timelinecovers.pro/facebook-cover/download/general-technology-computer-background-facebook-cover.jpg"
     alt="Computers classification illustration"
-    className="mb-4 rounded-lg"
+    className="w-full h-80 object-cover rounded-t-lg mb-6"
   />
-  <div className="mt-0 p-5 bg-primary/10 rounded-lg">
-    <p className="text-sm text-muted-foreground">
+
+  <div className="p-6 bg-primary/10 rounded-lg">
+    <p className="text-sm text-muted-foreground mb-4">
       Computers can be classified by size, purpose, or architecture:
     </p>
-    <ul className="list-disc pl-6">
-      <li>
+    <ul className="list-disc pl-6 space-y-2">
+      <li className="text-base">
         <strong>Size:</strong> Computers can range in size from small laptops to large mainframe systems.
       </li>
-      <li>
+      <li className="text-base">
         <strong>Purpose:</strong> Computers can be classified by their intended use, such as personal computers, servers, or supercomputers.
       </li>
-      <li>
+      <li className="text-base">
         <strong>Architecture:</strong> Computers can be grouped by design elements like memory organization or input/output systems.
       </li>
     </ul>
   </div>
 </div>
 
-    <ul className="list-disc pl-6">
-      <li>
-        <strong>Mainframe Computers</strong>
-        <div className="mt-2 p-4 bg-primary/10 rounded-lg">
-          <p className="text-sm text-muted-foreground">
-            Large, expensive computers that can process data at high speeds and are used by large organizations to manage large amounts of data.
-          </p>
+
+<ul className="flex flex-wrap gap-6 justify-center mt-4">
+      <li className="flex flex-col bg-white shadow-lg rounded-lg overflow-hidden w-64">
+        <div className="p-6">
+          <FaServer className="text-4xl text-primary mb-4" />
+          <strong className="text-lg font-semibold text-primary">Mainframe Computers</strong>
+          <div className="mt-4 p-4 bg-primary/10 rounded-lg">
+            <p className="text-sm text-muted-foreground">
+              Large, expensive computers that can process data at high speeds and are used by large organizations to manage large amounts of data.
+            </p>
+          </div>
         </div>
       </li>
-      <li>
-        <strong>Minicomputers</strong>
-        <div className="mt-2 p-4 bg-primary/10 rounded-lg">
-          <p className="text-sm text-muted-foreground">
-            Also known as midrange computers, these computers are used by small businesses and industries and are slower than mainframes.
-          </p>
+      <li className="flex flex-col bg-white shadow-lg rounded-lg overflow-hidden w-64">
+        <div className="p-6">
+          <FaLaptop className="text-4xl text-primary mb-4" />
+          <strong className="text-lg font-semibold text-primary">Minicomputers</strong>
+          <div className="mt-4 p-4 bg-primary/10 rounded-lg">
+            <p className="text-sm text-muted-foreground">
+              Also known as midrange computers, these computers are used by small businesses and industries and are slower than mainframes.
+            </p>
+          </div>
         </div>
       </li>
-      <li>
-        <strong>Microcomputers</strong>
-        <div className="mt-2 p-4 bg-primary/10 rounded-lg">
-          <p className="text-sm text-muted-foreground">
-            A compact, low cost computer with a microprocessor as its central processing unit.
-          </p>
+      <li className="flex flex-col bg-white shadow-lg rounded-lg overflow-hidden w-64">
+        <div className="p-6">
+          <FaMicrochip className="text-4xl text-primary mb-4" />
+          <strong className="text-lg font-semibold text-primary">Microcomputers</strong>
+          <div className="mt-4 p-4 bg-primary/10 rounded-lg">
+            <p className="text-sm text-muted-foreground">
+              A compact, low-cost computer with a microprocessor as its central processing unit.
+            </p>
+          </div>
         </div>
       </li>
-      <li>
-        <strong>Desktop Computers</strong>
-        <div className="mt-2 p-4 bg-primary/10 rounded-lg">
-          <p className="text-sm text-muted-foreground">
-            A personal computer designed to stay in one place and fits on or under a desk.
-          </p>
+      <li className="flex flex-col bg-white shadow-lg rounded-lg overflow-hidden w-64">
+        <div className="p-6">
+          <FaDesktop className="text-4xl text-primary mb-4" />
+          <strong className="text-lg font-semibold text-primary">Desktop Computers</strong>
+          <div className="mt-4 p-4 bg-primary/10 rounded-lg">
+            <p className="text-sm text-muted-foreground">
+              A personal computer designed to stay in one place and fits on or under a desk.
+            </p>
+          </div>
         </div>
       </li>
-      <li>
-        <strong>Workstations</strong>
-        <div className="mt-2 p-4 bg-primary/10 rounded-lg">
-          <p className="text-sm text-muted-foreground">
-            A specialized computer used for high performance tasks like video editing, graphic design, and scientific modeling.
-          </p>
+      <li className="flex flex-col bg-white shadow-lg rounded-lg overflow-hidden w-64">
+        <div className="p-6">
+          <FaCogs className="text-4xl text-primary mb-4" />
+          <strong className="text-lg font-semibold text-primary">Workstations</strong>
+          <div className="mt-4 p-4 bg-primary/10 rounded-lg">
+            <p className="text-sm text-muted-foreground">
+              A specialized computer used for high-performance tasks like video editing, graphic design, and scientific modeling.
+            </p>
+          </div>
         </div>
       </li>
     </ul>
-    <h5 className="font-medium">1. Mainframe Computers</h5>
-    <div className="mt-2 p-4 bg-primary/10 rounded-lg">
-      <p className="text-sm text-muted-foreground">
-        <strong>Use:</strong> Large scale data processing for organizations like banks, governments, and airlines.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Examples:</strong> Financial transactions, weather forecasting.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Technology Used:</strong> High performance CPUs and specialized hardware for massive parallel processing.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Operating Systems (OS):</strong> IBM z/OS, Linux on zSystems.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Size:</strong> Room sized or large cabinet sized systems.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Processing Power:</strong> Exceptionally high. Capable of processing billions of instructions per second (BIPS).
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Advantages:</strong> Handles enormous workloads with reliability. Superior data security. Ideal for mission critical tasks.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Disadvantages:</strong> Very expensive. Requires highly trained personnel.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Price:</strong> $500,000 to over $10 million.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Real World Applications:</strong> Banking systems, census data management, airline reservation systems.
-      </p>
-    </div>
-    <h5 className="font-medium">2. Minicomputers</h5>
-    <div className="mt-2 p-4 bg-primary/10 rounded-lg">
-      <p className="text-sm text-muted-foreground">
-        <strong>Use:</strong> Used by small to medium sized businesses for applications like database management and ERP systems.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Examples:</strong> Research labs, manufacturing control.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Technology Used:</strong> Multi user system architecture, slower than mainframes.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Operating Systems (OS):</strong> UNIX, Linux, VMS.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Size:</strong> Cabinet sized, smaller than mainframes.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Processing Power:</strong> Moderate to high. Processes millions of instructions per second (MIPS). Can support multiple users simultaneously.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Advantages:</strong> Affordable compared to mainframes. Multi user capability.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Disadvantages:</strong> Limited scalability for larger workloads. Becoming less common with modern servers.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Price:</strong> $5,000 to $200,000.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Real World Applications:</strong> Business servers, small research facilities, university labs.
-      </p>
-    </div>
-    <h5 className="font-medium">3. Microcomputers</h5>
-    <div className="mt-2 p-4 bg-primary/10 rounded-lg">
-      <p className="text-sm text-muted-foreground">
-        <strong>Use:</strong> Personal tasks like web browsing, office work, and gaming.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Examples:</strong> Home computers, entry level desktops.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Technology Used:</strong> Microprocessor based, such as Intel Core or AMD Ryzen CPUs.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Operating Systems (OS):</strong> Windows, macOS, Linux.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Size:</strong> Compact, small enough to fit on a desk or in a home.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Processing Power:</strong> Low to moderate. Processes millions of instructions per second (MIPS). Designed for single user applications.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Advantages:</strong> Affordable and widely available. Easy to use and maintain.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Disadvantages:</strong> Limited power for resource intensive tasks. Less robust for multitasking.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Price:</strong> $300 to $2,000.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Real World Applications:</strong> Home use, small offices, basic computing tasks.
-      </p>
-    </div>
-    <h5 className="font-medium">4. Desktop Computers</h5>
-    <div className="mt-2 p-4 bg-primary/10 rounded-lg">
-      <p className="text-sm text-muted-foreground">
-        <strong>Use:</strong> Professional and personal tasks like document editing, gaming, and light software development.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Examples:</strong> Office workstations, gaming PCs.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Technology Used:</strong> Intel Core, AMD Ryzen, or equivalent processors; often with discrete GPUs.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Operating Systems (OS):</strong> Windows, Linux.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Size:</strong> Small, intended to fit on or under a desk.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Processing Power:</strong> Moderate to high for personal use. Handles multitasking and medium complexity software.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Advantages:</strong> More powerful than microcomputers for professional tasks.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Disadvantages:</strong> Not as portable as laptops or tablets.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Price:</strong> $500 to $3,000.
-      </p>
-      <p className="text-sm text-muted-foreground">
-        <strong>Real World Applications:</strong> Office use, home entertainment, gaming.
-      </p>
-    </div>
+    
+    <div className="mt-4 p-6 bg-primary/10 rounded-xl shadow-lg flex items-center">
+  <div className="w-1/2 pr-6">
+    <h5 className="text-lg font-semibold text-primary">1. Mainframe Computers</h5>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Use:</span> Large-scale data processing for organizations like banks, governments, and airlines.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Examples:</span> Financial transactions, weather forecasting.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Technology Used:</span> High-performance CPUs and specialized hardware for massive parallel processing.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Operating Systems (OS):</span> IBM z/OS, Linux on zSystems.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Size:</span> Room-sized or large cabinet-sized systems.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Processing Power:</span> Exceptionally high, capable of processing billions of instructions per second (BIPS).
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Advantages:</span> Handles enormous workloads with reliability, superior data security, and ideal for mission-critical tasks.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Disadvantages:</span> Very expensive and requires highly trained personnel.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Price:</span> $500,000 to over $10 million.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Real World Applications:</span> Banking systems, census data management, airline reservation systems.
+    </p>
+  </div>
+  <div className="w-1/2">
+    <img src="https://www.entrepreneurshipinabox.com/wp-content/uploads/Mainframe-Computers.webp" alt="Mainframe Computers" className="w-full h-80 rounded-xl" />
+  </div>
+</div>
+
+
+
+<div className="mt-4 p-6 bg-primary/10 rounded-xl shadow-lg flex items-center">
+  <div className="w-1/2 pr-6">
+    <h5 className="text-lg font-semibold text-primary">2. Minicomputers</h5>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Use:</span> Used by small to medium-sized businesses for applications like database management and ERP systems.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Examples:</span> Research labs, manufacturing control.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Technology Used:</span> Multi-user system architecture, slower than mainframes.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Operating Systems (OS):</span> UNIX, Linux, VMS.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Size:</span> Cabinet-sized, smaller than mainframes.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Processing Power:</span> Moderate to high, processes millions of instructions per second (MIPS), and can support multiple users simultaneously.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Advantages:</span> More affordable than mainframes, supports multiple users.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Disadvantages:</span> Limited scalability for larger workloads, becoming less common with modern servers.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Price:</span> $5,000 to $200,000.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Real World Applications:</span> Business servers, small research facilities, university labs.
+    </p>
+  </div>
+  <div className="w-1/2">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Pdp7-oslo-2005.jpeg/800px-Pdp7-oslo-2005.jpeg" alt="Minicomputers" className="w-full h-80 rounded-xl" />
+  </div>
+</div>
+
+
+
+<div className="mt-4 p-6 bg-primary/10 rounded-xl shadow-lg flex items-center">
+  <div className="w-1/2 pr-6">
+    <h5 className="text-lg font-semibold text-primary">3. Microcomputers</h5>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Use:</span> Personal tasks like web browsing, office work, and gaming.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Examples:</span> Home computers, entry-level desktops.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Technology Used:</span> Microprocessor-based, such as Intel Core or AMD Ryzen CPUs.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Operating Systems (OS):</span> Windows, macOS, Linux.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Size:</span> Compact, small enough to fit on a desk or in a home.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Processing Power:</span> Low to moderate, processes millions of instructions per second (MIPS), designed for single-user applications.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Advantages:</span> Affordable and widely available, easy to use and maintain.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Disadvantages:</span> Limited power for resource-intensive tasks, less robust for multitasking.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Price:</span> $300 to $2,000.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Real World Applications:</span> Home use, small offices, basic computing tasks.
+    </p>
+  </div>
+  <div className="w-1/2">
+    <img src="https://learn.shilpa64.lk/unidata/m82/5/5/0/i_15625_4.jpg" alt="Microcomputers" className="w-full h-80 rounded-xl" />
+  </div>
+</div>
+
+
+
+<div className="mt-4 p-6 bg-primary/10 rounded-xl shadow-lg flex items-center">
+  <div className="w-1/2 pr-6">
+    <h5 className="text-lg font-semibold text-primary">4. Desktop Computers</h5>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Use:</span> Professional and personal tasks like document editing, gaming, and light software development.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Examples:</span> Office workstations, gaming PCs.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Technology Used:</span> Intel Core, AMD Ryzen, or equivalent processors; often with discrete GPUs.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Operating Systems (OS):</span> Windows, Linux.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Size:</span> Small, intended to fit on or under a desk.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Processing Power:</span> Moderate to high for personal use. Handles multitasking and medium complexity software.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Advantages:</span> More powerful than microcomputers for professional tasks.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Disadvantages:</span> Not as portable as laptops or tablets.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Price:</span> $500 to $3,000.
+    </p>
+    <p className="text-sm text-muted-foreground">
+      <span className="font-semibold text-primary">Real World Applications:</span> Office use, home entertainment, gaming.
+    </p>
+  </div>
+  <div className="w-1/2">
+    <img src="https://dlcdnrog.asus.com/rog/media/172782111228.webp" alt="Desktop Computers" className="w-full h-80 rounded-xl" />
+  </div>
+</div>
+
+
   </div>
 </div>
 
 {/* ---------------------------------------quizzes selected unit Computers--------------------------------------------- */}
 
-<Card className="p-6 bg-blue-50">
-  <h3 className="text-xl font-semibold mb-6">Unit 1 Quiz: Computers</h3>
+<Card className="p-6 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+  <h3 className="text-2xl font-semibold mb-6 text-center text-blue-700">Unit 1 Quiz: Computers</h3>
   <div className="space-y-8">
     {mcqQuestions.map((q, qIndex) => (
       <div key={q.id} className="space-y-4">
-        <div className="flex gap-2">
-          <span className="font-medium">{qIndex + 1}.</span>
-          <div className="space-y-3 flex-1">
-            <h4 className="font-medium">{q.question}</h4>
+        <div className="flex gap-4">
+          <span className="font-medium text-lg text-blue-600">{qIndex + 1}.</span>
+          <div className="space-y-4 flex-1">
+            <h4 className="text-xl font-medium text-blue-800">{q.question}</h4>
             <RadioGroup
               onValueChange={(value) => handleAnswerSelect(q.id, parseInt(value))}
               value={selectedAnswers[q.id]?.toString()}
             >
               {q.options.map((option, index) => (
-                <div key={index} className="flex items-center space-x-2">
+                <div key={index} className="flex items-center space-x-4">
                   <RadioGroupItem value={index.toString()} id={`q${q.id}-${index}`} />
-                  <Label htmlFor={`q${q.id}-${index}`} className="flex-1">
+                  <Label htmlFor={`q${q.id}-${index}`} className="flex-1 text-lg text-gray-700 hover:text-blue-600 transition-colors duration-200">
                     {option}
                     {showResults && (
                       <span className="ml-2">
                         {index === q.correctAnswer ? (
-                          <CheckCircle2 className="inline w-4 h-4 text-green-500" />
+                          <CheckCircle2 className="inline w-5 h-5 text-green-500" />
                         ) : selectedAnswers[q.id] === index ? (
-                          <XCircle className="inline w-4 h-4 text-red-500" />
+                          <XCircle className="inline w-5 h-5 text-red-500" />
                         ) : null}
                       </span>
                     )}
@@ -550,7 +602,7 @@ export default function Home() {
               ))}
             </RadioGroup>
             {showResults && (
-              <p className="text-sm text-gray-600 mt-2">
+              <p className="text-sm text-gray-600 mt-3">
                 <strong>Answer Explanation:</strong> {q.answerDescription}
               </p>
             )}
@@ -558,48 +610,48 @@ export default function Home() {
         </div>
       </div>
     ))}
-    <div className="pt-4 border-t">
+    <div className="pt-6 border-t border-blue-200">
       <Button
         onClick={() => setShowResults(true)}
-        className="w-full"
+        className="w-full py-3 text-lg font-semibold bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
         disabled={Object.keys(selectedAnswers).length < mcqQuestions.length}
       >
         Submit Quiz
       </Button>
       {showResults && (
-        <div className="flex justify-center">
-        <div className="mt-6 p-6 bg-secondary/50 rounded-lg text-center shadow-lg">
-          <h3 className="text-lg font-semibold text-primary">Your Score</h3>
-          <p className="mt-2 text-xl font-bold">
-            {calculateScore()} / {mcqQuestions.length}
-          </p>
-          <p className="text-sm">
-            (<span
-              className={`font-semibold text-lg ${
+        <div className="flex justify-center mt-8">
+          <div className="p-8 bg-blue-100 rounded-lg text-center shadow-xl">
+            <h3 className="text-lg font-semibold text-primary">Your Score</h3>
+            <p className="mt-2 text-2xl font-bold text-blue-800">
+              {calculateScore()} / {mcqQuestions.length}
+            </p>
+            <p className="text-sm mt-2">
+              (<span
+                className={`font-semibold text-lg ${
+                  ((calculateScore() / mcqQuestions.length) * 100) >= 50
+                    ? "text-green-500"
+                    : "text-red-500"
+                }`}
+              >
+                {((calculateScore() / mcqQuestions.length) * 100).toFixed(2)}%
+              </span>)
+            </p>
+            <p
+              className={`mt-4 text-lg font-bold ${
                 ((calculateScore() / mcqQuestions.length) * 100) >= 50
-                  ? "text-green-500"
-                  : "text-red-500"
+                  ? "text-green-600"
+                  : "text-red-600"
               }`}
             >
-              {((calculateScore() / mcqQuestions.length) * 100).toFixed(2)}%
-            </span>)
-          </p>
-          <p
-            className={`mt-2 text-lg font-bold ${
-              ((calculateScore() / mcqQuestions.length) * 100) >= 50
-                ? "text-green-600"
-                : "text-red-600"
-            }`}
-          >
-            {((calculateScore() / mcqQuestions.length) * 100) >= 50 ? "Pass" : "Fail"}
-          </p>
+              {((calculateScore() / mcqQuestions.length) * 100) >= 50 ? "Pass" : "Fail"}
+            </p>
+          </div>
         </div>
-      </div>
-      
       )}
     </div>
   </div>
 </Card>
+
 
 
 
