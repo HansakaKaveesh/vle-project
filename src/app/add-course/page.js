@@ -12,35 +12,17 @@ const AddCourse = ({ userId }) => {
     {
       name: "Cambridge",
       subCourses: [
-        {
-          name: "IAL",
-          subjects: ["ICT", "CS"],
-        },
-        {
-          name: "IGCSE",
-          subjects: ["ICT", "CS"],
-        },
-        {
-          name: "GCSE",
-          subjects: ["ICT", "CS"],
-        },
+        { name: "IAL", subjects: ["ICT", "CS"] },
+        { name: "IGCSE", subjects: ["ICT", "CS"] },
+        { name: "GCSE", subjects: ["ICT", "CS"] },
       ],
     },
     {
       name: "Edexcel",
       subCourses: [
-        {
-          name: "IAL",
-          subjects: ["ICT", "CS"],
-        },
-        {
-          name: "IGCSE",
-          subjects: ["ICT", "CS"],
-        },
-        {
-          name: "GCSE",
-          subjects: ["ICT", "CS"],
-        },
+        { name: "IAL", subjects: ["ICT", "CS"] },
+        { name: "IGCSE", subjects: ["ICT", "CS"] },
+        { name: "GCSE", subjects: ["ICT", "CS"] },
       ],
     },
   ];
@@ -65,10 +47,7 @@ const AddCourse = ({ userId }) => {
         )
       );
     } else {
-      setSelectedCourses((prev) => [
-        ...prev,
-        { course, subCourse, subject },
-      ]);
+      setSelectedCourses((prev) => [...prev, { course, subCourse, subject }]);
     }
   };
 
@@ -90,11 +69,9 @@ const AddCourse = ({ userId }) => {
       );
 
       await Promise.all(promises);
-
       setSuccessMessage("Courses added successfully!");
       setSelectedCourses([]);
 
-      // Redirect to Enrolled Courses page after saving
       setTimeout(() => router.push("/enrolled-courses"), 1500);
     } catch (error) {
       console.error("Error saving courses:", error);
@@ -152,21 +129,27 @@ const AddCourse = ({ userId }) => {
           )}
         </div>
 
-        <button
-          onClick={handleSave}
-          disabled={selectedCourses.length === 0}
-          className={`mt-6 w-full bg-green-500 text-white py-2 px-6 rounded-lg hover:bg-green-600 transition ease-in-out duration-300 ${
-            selectedCourses.length === 0 ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          Save Selected Courses
-        </button>
+        <div className="flex flex-col sm:flex-row gap-4 mt-6">
+          <button
+            onClick={handleSave}
+            disabled={selectedCourses.length === 0}
+            className={`w-full sm:w-auto bg-green-500 text-white py-2 px-6 rounded-lg hover:bg-green-600 transition ease-in-out duration-300 ${
+              selectedCourses.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+          >
+            Save Selected Courses
+          </button>
+
+          <button
+            onClick={() => router.push("/study-materials")}
+            className="w-full sm:w-auto bg-purple-500 text-white py-2 px-6 rounded-lg hover:bg-purple-600 transition ease-in-out duration-300"
+          >
+            View Study Materials
+          </button>
+        </div>
       </main>
     </div>
   );
 };
 
 export default AddCourse;
-
-// Example usage: Replace `userId` with the current logged-in user ID
-// <AddCourse userId={1} />
