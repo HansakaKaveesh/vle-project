@@ -3,7 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const AddCourse = ({ userId }) => {
+const AddCourse = () => {
+  const { data: session } = useSession(); 
+  const userId = session?.user?.id; 
+
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
