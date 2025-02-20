@@ -2,10 +2,10 @@ import Image from 'next/image';
 
 export default function MeetTeachersStudents() {
   const people = [
-    { name: 'Mr. Tanjana Chamikara', role: 'Teacher', image: '/tanjana-sir-image-1.png' },
-    { name: 'Ms. Madhara Wedhage', role: 'Teacher', image: '/madara-miss-image-600-2-1.png' },
-    { name: 'Ms. Udara Dilshani', role: 'Teacher', image: '/udara-miss-2.png' },
-    { name: 'David', role: 'Teacher', image: '/Women.jpg' },
+    { name: 'Mr. Tanjana Chamikara', role: 'Teacher', image: '/images/home/tanjana-sir-image-1.png' },
+    { name: 'Ms. Madhara Wedhage', role: 'Teacher', image: '/images/home/madara-miss-image-600-2-1.png' },
+    { name: 'Ms. Udara Dilshani', role: 'Teacher', image: '/images/home/udara-miss-2.png' },
+    { name: 'David', role: 'Teacher', image: '/images/home/Women.jpg' },
   ];
 
   return (

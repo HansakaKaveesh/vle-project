@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className="relative bg-cover bg-center text-white text-center py-40">
       <Image
-        src="/Hero bg.jpg" // Update the image path
+        src="/images/home/Hero bg.jpg" // Update the image path
         alt="Hero Background"
         layout="fill"
         objectFit="cover"
