@@ -7,6 +7,9 @@ import {
   FaFlask,
   FaHistory,
   FaPalette,
+  FaSignInAlt,
+  FaUserPlus,
+  FaUserCircle
 } from "react-icons/fa";
 
 export default function Navbar() {
@@ -18,7 +21,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="sticky z-20 top-0 bg-blue-600 text-white shadow-lg px-6 py-4">
+    <nav className="sticky z-20 top-0 bg-blue-600  text-white shadow-lg px-6 py-4">
       <div className="flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="text-4xl font-extrabold tracking-wide hover:scale-105 transition-transform duration-300">
@@ -157,13 +160,25 @@ export default function Navbar() {
 
         {/* Auth Buttons */}
         <div className="hidden md:flex space-x-6">
-          <Link href="/login" className="bg-yellow-500 text-black px-5 py-2 rounded-lg shadow-lg hover:bg-yellow-400 transition-all duration-300">
-            Sign In
-          </Link>
-          <Link href="/register" className="bg-yellow-500 text-black px-5 py-2 rounded-lg shadow-lg hover:bg-yellow-400 transition-all duration-300">
-            Register
-          </Link>
-        </div>
+      <Link
+        href="/login"
+        className="flex items-center bg-yellow-500 text-black px-5 py-2 rounded-lg shadow-lg hover:bg-yellow-400 transition-all duration-300"
+      >
+        <FaSignInAlt className="mr-2" /> Sign In
+      </Link>
+      <Link
+        href="/register"
+        className="flex items-center bg-yellow-500 text-black px-5 py-2 rounded-lg shadow-lg hover:bg-yellow-400 transition-all duration-300"
+      >
+        <FaUserPlus className="mr-2" /> Register
+      </Link>
+      <Link
+        href="/dashboard"
+        className="flex items-center bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-700 transition-all duration-300"
+      >
+        <FaUserCircle className="mr-2 text-xl" /> Profile
+      </Link>
+    </div>
       </div>
     </nav>
   );
