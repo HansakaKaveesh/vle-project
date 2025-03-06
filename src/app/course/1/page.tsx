@@ -11,14 +11,10 @@ import { RadioGroup, RadioGroupItem } from "../../components/ui/radio-group";
 import { Label } from "../../components/ui/label";
 import { FaDesktop, FaServer, FaMicrochip, FaCogs, FaLaptop } from 'react-icons/fa'; // Import icons from react-icons
 import Quiz from './components/quiz';
+import Computers from './components/computers';
 
 
-  
-
-  
-
-
-export default function Home() {
+  export default function Home() {
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
   const [showResults, setShowResults] = useState(false);
 
@@ -29,10 +25,7 @@ export default function Home() {
     }));
   };
 
-  
-
- 
-    const [selectedUnit, setSelectedUnit] = useState("unit1");
+  const [selectedUnit, setSelectedUnit] = useState("unit1");
   
     const handleUnitChange = (e) => {
       setSelectedUnit(e.target.value);
@@ -84,7 +77,7 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column - Course Progress */}
           <div className="lg:col-span-2">
-            <Tabs defaultValue="modules" className="space-y-4">
+            <Tabs defaultValue="modules" className="space-y-5">
               <TabsList>
                 <TabsTrigger value="modules">Modules</TabsTrigger>
                 
@@ -205,26 +198,45 @@ export default function Home() {
   
   <div className="group bg-gradient-to-br from-red-50 to-orange-50 shadow-2xl hover:shadow-3xl rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2 relative">
   {/* Glow effect */}
-  <div className="absolute inset-0 bg-gradient-to-r from-red-200/20 to-transparent pointer-events-none" />
-  
-  <div className="relative">
+  <div className="absolute inset-0 bg-gradient-to-r from-red-300/20 via-transparent to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+
+<div className="relative overflow-hidden perspective-1000">
+  {/* Parallax effect container */}
+  <div className="relative transform transition-transform duration-700 group-hover:scale-[1.03] group-hover:rotate-[0.5deg] hover:shadow-2xl">
     <img
       src="https://timelinecovers.pro/facebook-cover/download/general-technology-computer-background-facebook-cover.jpg"
       alt="Computers classification illustration"
-      className="w-full h-80 object-cover rounded-t-2xl transform transition-transform duration-700 group-hover:scale-[1.03] group-hover:rotate-[0.5deg]"
+      className="w-full h-80 object-cover rounded-t-2xl transform transition-transform duration-700 origin-bottom"
     />
-    <div className="absolute inset-0 bg-gradient-to-t from-red-900/80 via-red-800/30 to-transparent flex items-end justify-start p-8">
+    {/* Dynamic gradient overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-red-900/90 via-red-800/40 to-transparent flex items-end justify-start p-8">
+      <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent_60%,rgba(255,255,255,0.1)_80%,transparent_100%)] opacity-0 group-hover:opacity-100 group-hover:animate-shine" />
+      
       <div className="flex items-center gap-4 animate-fade-in-up">
-        <span className="text-red-300 font-bold text-5xl drop-shadow-lg bg-white/10 p-3 rounded-2xl backdrop-blur-sm">
+        <span className="text-red-300 font-bold text-5xl drop-shadow-lg bg-white/10 p-3 rounded-2xl backdrop-blur-sm border-2 border-white/20 hover:border-red-300/30 transition-all duration-300 hover:animate-float">
           01
+          {/* Animated outer circle */}
+          <span className="absolute inset-0 border-2 border-red-300/20 rounded-2xl pointer-events-none animate-pulse"></span>
         </span>
-        <h2 className="text-4xl font-bold text-white tracking-tight">
-          <span className="font-serif block text-5xl mb-2">Computers</span>
-          <span className="block h-[3px] w-24 bg-gradient-to-r from-red-400 to-orange-300 rounded-full" />
+        
+        <h2 className="text-4xl font-bold text-white tracking-tight relative">
+          <span className="font-serif block text-5xl mb-2 bg-gradient-to-r from-red-100 to-orange-100 bg-clip-text text-transparent">
+            Computing Systems
+          </span>
+          <span className="block h-[3px] w-24 bg-gradient-to-r from-red-400 to-orange-300 rounded-full transform transition-all duration-500 group-hover:w-32 group-hover:from-red-300 group-hover:to-orange-200" />
+          {/* Decorative sparkles */}
+          <svg className="absolute -top-4 -right-8 w-12 h-12 text-red-300/40 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+          </svg>
         </h2>
       </div>
     </div>
   </div>
+
+  {/* Animated corner elements */}
+  <div className="absolute top-4 left-4 w-8 h-8 border-t-4 border-l-4 border-red-300/30 rounded-tl-2xl transition-all duration-500 group-hover:border-red-400" />
+  <div className="absolute bottom-4 right-4 w-8 h-8 border-b-4 border-r-4 border-red-300/30 rounded-br-2xl transition-all duration-500 group-hover:border-red-400" />
+</div>
 
   <div className="p-8 bg-gradient-to-b from-white/95 to-red-50/60">
     <p className="text-lg text-red-900/90 italic font-medium mb-8 pl-6 relative before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-red-300 before:rounded-full">
@@ -349,181 +361,13 @@ export default function Home() {
   ))}
 </ul>
     
-    <div className="mt-4 p-6 bg-primary/10 rounded-xl shadow-lg flex items-center">
-    <div className="w-1/2 pr-6">
-  <h5 className="text-lg font-semibold text-blue-600">1. Mainframe Computers</h5>
-  <p className="text-sm text-muted-foreground mt-2">
-    <span className="font-semibold text-red-500">Use:</span> Large-scale data processing for organizations like banks, governments, and airlines.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Examples:</span> Financial transactions, weather forecasting.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Technology Used:</span> High-performance CPUs and specialized hardware for massive parallel processing.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Operating Systems (OS):</span> IBM z/OS, Linux on zSystems.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Size:</span> Room-sized or large cabinet-sized systems.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Processing Power:</span> Exceptionally high, capable of processing billions of instructions per second (BIPS).
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Advantages:</span> Handles enormous workloads with reliability, superior data security, and ideal for mission-critical tasks.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Disadvantages:</span> Very expensive and requires highly trained personnel.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Price:</span> $500,000 to over $10 million.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Real World Applications:</span> Banking systems, census data management, airline reservation systems.
-  </p>
-</div>
-
-<div className="w-1/2">
-    <img src="https://www.entrepreneurshipinabox.com/wp-content/uploads/Mainframe-Computers.webp" alt="Mainframe Computers" className="w-full h-80 rounded-xl" />
-  </div>
-</div>
-
-
-
-<div className="mt-4 p-6 bg-primary/10 rounded-xl shadow-lg flex items-center">
-<div className="w-1/2 pr-6">
-  <h5 className="text-lg font-semibold text-primary text-blue-600">2. Minicomputers</h5>
-  <p className="text-sm text-muted-foreground mt-2">
-    <span className="font-semibold text-red-500">Use:</span> Used by small to medium-sized businesses for applications like database management and ERP systems.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Examples:</span> Research labs, manufacturing control.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Technology Used:</span> Multi-user system architecture, slower than mainframes.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Operating Systems (OS):</span> UNIX, Linux, VMS.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Size:</span> Cabinet-sized, smaller than mainframes.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Processing Power:</span> Moderate to high, processes millions of instructions per second (MIPS), and can support multiple users simultaneously.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Advantages:</span> More affordable than mainframes, supports multiple users.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Disadvantages:</span> Limited scalability for larger workloads, becoming less common with modern servers.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Price:</span> $5,000 to $200,000.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Real World Applications:</span> Business servers, small research facilities, university labs.
-  </p>
-</div>
-
-
-  <div className="w-1/2">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Pdp7-oslo-2005.jpeg/800px-Pdp7-oslo-2005.jpeg" alt="Minicomputers" className="w-full h-80 rounded-xl" />
-  </div>
-</div>
-
-
-
-<div className="mt-4 p-6 bg-primary/10 rounded-xl shadow-lg flex items-center">
-<div className="w-1/2 pr-6">
-  <h5 className="text-lg font-semibold text-primary text-blue-600">3. Microcomputers</h5>
-  <p className="text-sm text-muted-foreground mt-2">
-    <span className="font-semibold text-red-500">Use:</span> Personal tasks like web browsing, office work, and gaming.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Examples:</span> Home computers, entry-level desktops.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Technology Used:</span> Microprocessor-based, such as Intel Core or AMD Ryzen CPUs.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Operating Systems (OS):</span> Windows, macOS, Linux.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Size:</span> Compact, small enough to fit on a desk or in a home.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Processing Power:</span> Low to moderate, processes millions of instructions per second (MIPS), designed for single-user applications.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Advantages:</span> Affordable and widely available, easy to use and maintain.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Disadvantages:</span> Limited power for resource-intensive tasks, less robust for multitasking.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Price:</span> $300 to $2,000.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Real World Applications:</span> Home use, small offices, basic computing tasks.
-  </p>
-</div>
-
-  <div className="w-1/2">
-    <img src="https://learn.shilpa64.lk/unidata/m82/5/5/0/i_15625_4.jpg" alt="Microcomputers" className="w-full h-80 rounded-xl" />
-  </div>
-</div>
-
-
-
-<div className="mt-4 p-6 bg-primary/10 rounded-xl shadow-lg flex items-center">
-<div className="w-1/2 pr-6">
-  <h5 className="text-lg font-semibold text-primary text-blue-600">4. Desktop Computers</h5>
-  <p className="text-sm text-muted-foreground mt-2">
-    <span className="font-semibold text-red-500">Use:</span> Professional and personal tasks like document editing, gaming, and light software development.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Examples:</span> Office workstations, gaming PCs.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Technology Used:</span> Intel Core, AMD Ryzen, or equivalent processors; often with discrete GPUs.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Operating Systems (OS):</span> Windows, Linux.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Size:</span> Small, intended to fit on or under a desk.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Processing Power:</span> Moderate to high for personal use. Handles multitasking and medium complexity software.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Advantages:</span> More powerful than microcomputers for professional tasks.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Disadvantages:</span> Not as portable as laptops or tablets.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Price:</span> $500 to $3,000.
-  </p>
-  <p className="text-sm text-muted-foreground mt-1">
-    <span className="font-semibold text-red-500">Real World Applications:</span> Office use, home entertainment, gaming.
-  </p>
-</div>
-
-  <div className="w-1/2">
-    <img src="https://dlcdnrog.asus.com/rog/media/172782111228.webp" alt="Desktop Computers" className="w-full h-80 rounded-xl" />
-  </div>
-</div>
+<Computers />
 
 
   </div>
 </div>
 
-{/* ---------------------------------------quizzes selected unit Computers--------------------------------------------- */}
-<div className='mb-8'>
-  <Quiz />
-</div>
+<Quiz />
 
 
 

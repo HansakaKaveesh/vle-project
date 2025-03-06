@@ -10,7 +10,8 @@ const courseOptions = [
     description: "Comprehensive course covering Edexcel ICT IGCSE syllabus",
     duration: "12 Months",
     instructor: "Ms. Madhara Wedhage",
-    level: "Intermediate"
+    level: "Intermediate",
+    available: true
   },
   {
     id: 2,
@@ -18,7 +19,8 @@ const courseOptions = [
     description: "Complete Cambridge ICT curriculum with practical projects",
     duration: "10 Months",
     instructor: "Prof. Michael Chen",
-    level: "Foundation"
+    level: "Foundation",
+    available: false
   }
 ];
 
@@ -41,6 +43,7 @@ const AddCourse = () => {
 
     try {
       if (!username) throw new Error("Please login to add courses");
+      if (!selectedCourse.available) throw new Error("This course is not currently available");
       
       const existingCourses = JSON.parse(localStorage.getItem(`courses_${username}`)) || [];
       
@@ -56,7 +59,6 @@ const AddCourse = () => {
         message: `${selectedCourse.name} added successfully!`
       });
       
-      // Reset feedback after 3 seconds
       setTimeout(() => setFeedback({ type: null, message: null }), 3000);
     } catch (error) {
       setFeedback({
@@ -84,11 +86,15 @@ const AddCourse = () => {
             {courseOptions.map((course) => (
               <div
                 key={course.id}
-                onClick={() => setSelectedCourse(course)}
-                className={`p-4 rounded-lg cursor-pointer transition-all ${
+                onClick={() => course.available && setSelectedCourse(course)}
+                className={`p-4 rounded-lg transition-all ${
+                  course.available 
+                    ? 'cursor-pointer hover:border-blue-200' 
+                    : 'opacity-75 cursor-not-allowed'
+                } ${
                   selectedCourse.id === course.id
                     ? 'border-2 border-blue-500 bg-blue-50'
-                    : 'border border-gray-200 hover:border-blue-200'
+                    : 'border border-gray-200'
                 }`}
               >
                 <div className="flex justify-between items-start">
@@ -130,9 +136,18 @@ const AddCourse = () => {
                       </span>
                     </div>
                   </div>
-                  <span className="text-xs font-medium px-2 py-1 rounded-full bg-blue-100 text-blue-800">
-                    {course.level}
-                  </span>
+                  <div className="flex flex-col items-end gap-2">
+                    <span className="text-xs font-medium px-2 py-1 rounded-full bg-blue-100 text-blue-800">
+                      {course.level}
+                    </span>
+                    <span className={`text-xs font-medium px-2 py-1 rounded-full ${
+                      course.available
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
+                    }`}>
+                      {course.available ? 'Available' : 'Unavailable'}
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -158,7 +173,7 @@ const AddCourse = () => {
 
         <button
           onClick={handleAddCourse}
-          disabled={loading}
+          disabled={loading || !selectedCourse.available}
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? (
