@@ -19,6 +19,8 @@ export default function Navbar() {
   const [ialOpen, setIalOpen] = useState(false);
   const [igcseOpen, setIgcseOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+  
 
   return (
     <nav className="sticky z-20 top-0 bg-blue-600  text-white shadow-lg px-6 py-4">
@@ -159,26 +161,36 @@ export default function Navbar() {
         </ul>
 
         {/* Auth Buttons */}
-        <div className="hidden md:flex space-x-6">
-      <Link
-        href="/login"
-        className="flex items-center bg-yellow-500 text-black px-5 py-2 rounded-lg shadow-lg hover:bg-yellow-400 transition-all duration-300"
-      >
-        <FaSignInAlt className="mr-2" /> Sign In
-      </Link>
-      <Link
-        href="/register"
-        className="flex items-center bg-yellow-500 text-black px-5 py-2 rounded-lg shadow-lg hover:bg-yellow-400 transition-all duration-300"
-      >
-        <FaUserPlus className="mr-2" /> Register
-      </Link>
-      <Link
-        href="/dashboard"
-        className="flex items-center bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-700 transition-all duration-300"
-      >
-        <FaUserCircle className="mr-2 text-xl" /> Profile
-      </Link>
-    </div>
+        <div className="hidden md:flex items-center gap-3">
+  <Link
+    href="/login"
+    className="flex items-center bg-gradient-to-b from-yellow-400 to-yellow-500 text-black px-5 py-2 rounded-lg shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-200 font-semibold group text-sm"
+  >
+    <FaSignInAlt className="mr-2 text-base transition-transform group-hover:translate-x-0.5" />
+    Sign In
+  </Link>
+
+  <Link
+    href="/register"
+    className="flex items-center bg-gradient-to-b from-blue-400 to-blue-500 text-white px-5 py-2 rounded-lg shadow-md hover:shadow-lg hover:scale-[1.03] transition-all duration-200 font-semibold group text-sm"
+  >
+    <FaUserPlus className="mr-2 text-base transition-transform group-hover:translate-x-0.5" />
+    Register
+  </Link>
+
+  <div className="relative">
+    <Link
+      href="/dashboard"
+      className="flex items-center justify-center w-9 h-9 bg-gray-800 text-white rounded-lg shadow-md hover:bg-gray-700 hover:scale-[1.03] transition-all duration-200 relative ring-1 ring-transparent hover:ring-yellow-400 focus:outline-none"
+      aria-label="User Dashboard"
+    >
+      <FaUserCircle className="text-xl" />
+      <span className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow-sm">
+        3
+      </span>
+    </Link>
+  </div>
+</div>
       </div>
     </nav>
   );

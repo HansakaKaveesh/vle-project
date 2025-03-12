@@ -88,7 +88,14 @@ useEffect(() => {
   
     <main className="flex-grow container mx-auto py-12 px-6 relative z-10">
       {/* Welcome Section */}
-      <div className="text-center mb-12 bg-gradient-to-br from-white to-blue-50 py-8 rounded-2xl shadow-2xl border border-white/50 relative overflow-hidden">
+      <div
+  className="relative text-center mb-12 bg-gradient-to-br from-blue-50 to-blue-100 py-16 rounded-3xl shadow-2xl hover:shadow-3xl transition-shadow duration-300 border border-blue-200/30 overflow-hidden bg-cover bg-center group"
+  style={{
+    backgroundImage: "url(https://www.keg.com/hubfs/iStock-1141014440.jpg)",
+  }}
+>
+  {/* Enhanced Glass Overlay */}
+  <div className="absolute inset-0 bg-blue-50/65 backdrop-blur-sm rounded-3xl transition-all duration-500 group-hover:bg-blue-50/70"></div>
         {/* Animated particles background */}
         <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/dot-noise.png')]" />
         
