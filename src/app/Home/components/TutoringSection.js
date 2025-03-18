@@ -49,7 +49,7 @@ const TutoringSection = () => {
               placeholder="Search subjects or tutors..."
               className="w-full px-6 py-4 rounded-xl border-0 ring-2 ring-purple-200 focus:ring-4 focus:ring-purple-500 transition-all duration-300 placeholder-gray-400"
             />
-            <button className="absolute right-2 top-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+            <button className="absolute right-2 top-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
               Search
             </button>
           </div>

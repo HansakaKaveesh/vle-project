@@ -84,12 +84,9 @@ import Computers from './components/computers';
                 <TabsTrigger value="resources">Resources</TabsTrigger>
                 <TabsTrigger value="discussions">Discussions</TabsTrigger>
               </TabsList>
-
-
-
-              
               <TabsContent value="modules" className="space-y-4">
-      {/* Dropdown for selecting unit */}
+                
+{/*--------------------------------------------------------------------- Dropdown for selecting unit ----------------------------------------------------------------- */}
       <div className="mb-6 group">
   <label 
     htmlFor="unit-select" 
@@ -133,7 +130,7 @@ import Computers from './components/computers';
 </div>
 
       
-{/* ---------------------------------------Conditional rendering based on selected unit--------------------------------------------- */}      
+{/* --------------------------------------------------- Conditional rendering based on selected unit ---------------------------------------------------- */}      
       
       {/* Conditional rendering based on selected unit */}
       {selectedUnit === "unit1" && (
@@ -147,8 +144,8 @@ import Computers from './components/computers';
           </div>
           <div className="space-y-4">
             
-            
-            {/* Chapter 1: DIGITAL DEVICES */}
+                 
+{/*--------------------------------------------------------- Chapter 1: DIGITAL DEVICES ------------------------------------------------------------------*/}
             <div
   className="group relative flex items-center justify-center gap-6 p-8 bg-cover bg-center bg-no-repeat rounded-xl transition-all duration-300 hover:shadow-xl overflow-hidden"
   style={{ backgroundImage: 'url(https://ichef.bbci.co.uk/images/ic/1200xn/p0f377s6.jpg)' }}
@@ -191,7 +188,7 @@ import Computers from './components/computers';
 
 
 
-            {/* Computers */}
+{/* Computers */}
   <div className="flex items-start gap-4 p-4 bg-secondary/50 rounded-lg">
   
   <div>
@@ -233,12 +230,13 @@ import Computers from './components/computers';
     </div>
   </div>
 
-  {/* Animated corner elements */}
-  <div className="absolute top-4 left-4 w-8 h-8 border-t-4 border-l-4 border-red-300/30 rounded-tl-2xl transition-all duration-500 group-hover:border-red-400" />
+  {/*--------------------------------------------------------- Animated corner elements ------------------------------------------------------------------------*/}
+ 
+<div className="absolute top-4 left-4 w-8 h-8 border-t-4 border-l-4 border-red-300/30 rounded-tl-2xl transition-all duration-500 group-hover:border-red-400" />
   <div className="absolute bottom-4 right-4 w-8 h-8 border-b-4 border-r-4 border-red-300/30 rounded-br-2xl transition-all duration-500 group-hover:border-red-400" />
 </div>
 
-  <div className="p-8 bg-gradient-to-b from-white/95 to-red-50/60">
+<div className="p-8 bg-gradient-to-b from-white/95 to-red-50/60">
     <p className="text-lg text-red-900/90 italic font-medium mb-8 pl-6 relative before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-red-300 before:rounded-full">
       "Computers can be classified by size, purpose, or architecture"
     </p>
