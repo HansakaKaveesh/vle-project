@@ -192,6 +192,7 @@ useEffect(() => {
       {/* Toast component would go here */}
     </div>
   </div>
+  
   );
 };
 

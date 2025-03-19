@@ -39,7 +39,7 @@ export default function Hero() {
         >
           {/* Badge */}
           <div className="mb-6 inline-flex items-center gap-2 bg-yellow-400/20 backdrop-blur-sm px-4 py-2 rounded-full text-yellow-400 text-sm font-medium">
-            <Star className="w-4 h-4" />
+            <Star className="w-4 h-4" aria-hidden="true" />
             <span>Rated 4.9/5 by 2,500+ Students</span>
           </div>
 
@@ -63,9 +63,12 @@ export default function Hero() {
             whileTap={{ scale: 0.95 }}
             className="mt-8"
           >
-            <button className="group relative inline-flex items-center justify-center px-8 py-4 space-x-2 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
+            <button 
+              className="group relative inline-flex items-center justify-center px-8 py-4 space-x-2 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
+              aria-label="Start Learning Free"
+            >
               <span>Start Learning Free</span>
-              <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
               <div className="absolute inset-0 border-2 border-yellow-400/30 rounded-full animate-ping-slow opacity-0 group-hover:opacity-100" />
             </button>
           </motion.div>
@@ -75,20 +78,25 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="mt-12 grid grid-cols-3 gap-8 text-left max-w-4xl mx-auto"
+            className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 text-left max-w-4xl mx-auto"
           >
             {stats.map((stat, index) => (
-              <div key={index} className="p-4 backdrop-blur-sm bg-white/5 rounded-xl">
+              <motion.div
+                key={index}
+                className="p-4 backdrop-blur-sm bg-white/5 rounded-xl"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type : "spring", stiffness: 300 }}
+              >
                 <div className="text-3xl font-bold text-yellow-400">{stat.number}</div>
                 <div className="mt-1 text-sm text-gray-300">{stat.label}</div>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </motion.div>
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce-slow">
-          <ChevronRight className="w-8 h-8 text-yellow-400 transform rotate-90" />
+          <ChevronRight className="w-8 h-8 text-yellow-400 transform rotate-90" aria-hidden="true" />
         </div>
       </div>
     </section>
