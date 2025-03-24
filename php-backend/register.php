@@ -1,41 +1,31 @@
 <?php
-// Enable CORS
-header("Access-Control-Allow-Origin: http://localhost:3000"); // Allow requests from the frontend
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");  // Specify allowed HTTP methods
-header("Access-Control-Allow-Headers: Content-Type, Authorization"); // Allow required headers
+// Allow requests from all origins
+header("Access-Control-Allow-Origin: *");
 
-// Handle preflight OPTIONS request
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit();
-}
+// Allow specific headers (e.g., Content-Type)
+header("Access-Control-Allow-Headers: Content-Type");
 
-// Database connection
-$conn = new mysqli('localhost', 'root', '', 'nextjs_auth');
-if ($conn->connect_error) {
-    die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
-}
+// Allow HTTP methods (e.g., POST, GET)
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 
-// Retrieve input data
-$input = json_decode(file_get_contents('php://input'), true);
+// Include database connection
+include 'db.php';
 
-// Validate input data
-if (isset($input['fullname'], $input['username'], $input['email'], $input['password'])) {
-    $fullname = $conn->real_escape_string($input['fullname']);
-    $username = $conn->real_escape_string($input['username']);
-    $email = $conn->real_escape_string($input['email']);
-    $password = password_hash($input['password'], PASSWORD_DEFAULT); // Hash the password
+// Your existing code
+$data = json_decode(file_get_contents('php://input'), true);
+$full_name = $data['full_name'];
+$username = $data['username'];
+$country = $data['country'];
+$email = $data['email'];
+$password = password_hash($data['password'], PASSWORD_DEFAULT);
+$role = $data['role'];
 
-    // Insert data into the database
-    $query = "INSERT INTO users (fullname, username, email, password) VALUES ('$fullname', '$username', '$email', '$password')";
+$sql = "INSERT INTO users (full_name, username, country, email, password, role) VALUES ('$full_name', '$username', '$country', '$email', '$password', '$role')";
 
-    if ($conn->query($query)) {
-        echo json_encode(["success" => true, "message" => "Registration successful!"]);
-    } else {
-        echo json_encode(["error" => "Database error: " . $conn->error]);
-    }
+if ($conn->query($sql) === TRUE) {
+    echo json_encode(["success" => true, "message" => "User registered successfully"]);
 } else {
-    echo json_encode(["error" => "Invalid input"]);
+    echo json_encode(["success" => false, "message" => "Error: " . $conn->error]);
 }
 
 $conn->close();
