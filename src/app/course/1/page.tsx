@@ -187,9 +187,6 @@ import Header from './components/header';
   </div>
 </div>
 
-
-
-
 {/* Computers */}
   <div className="flex items-start gap-4 p-4 bg-secondary/50 rounded-lg">
   
@@ -208,9 +205,6 @@ import Header from './components/header';
 </div>
 
 <Quiz />
-
-
-
 
 {/* Mobile Devices */}
 <div className="bg-green-100 shadow-lg rounded-lg overflow-hidden">
