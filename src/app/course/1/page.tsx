@@ -2,14 +2,10 @@
 
 import Link from 'next/link';
 import { useState } from "react";
-import { Book, Clock, FileText, PlayCircle, Users, CheckCircle2, XCircle } from "lucide-react";
+import { Book, Clock, FileText, Users } from "lucide-react";
 import { Card } from "../../components/ui/card";
-import { Progress } from "../../components/ui/progress";
 import { Button } from "../../components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
-import { RadioGroup, RadioGroupItem } from "../../components/ui/radio-group";
-import { Label } from "../../components/ui/label";
-import { FaDesktop, FaServer, FaMicrochip, FaCogs, FaLaptop } from 'react-icons/fa'; // Import icons from react-icons
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Quiz from './components/quiz';
 import Computers from './components/computers';
 import Topics from './components/topics';
@@ -142,7 +138,6 @@ import Header from './components/header';
               <Book className="w-5 h-5 text-primary" />
               <h3 className="text-lg font-semibold">UNIT 1: DIGITAL DEVICES</h3>
             </div>
-            <Progress value={75} className="w-24" />
           </div>
           <div className="space-y-4">
             
@@ -247,7 +242,7 @@ import Header from './components/header';
               <Book className="w-5 h-5 text-primary" />
               <h3 className="text-lg font-semibold">UNIT 2: CONNECTIVITY</h3>
             </div>
-            <Progress value={50} className="w-24" />
+            
           </div>
           <div className="space-y-4">
             {/* Content for UNIT 2 */}
@@ -262,7 +257,7 @@ import Header from './components/header';
               <Book className="w-5 h-5 text-primary" />
               <h3 className="text-lg font-semibold">UNIT 3: OPERATING ONLINE</h3>
             </div>
-            <Progress value={60} className="w-24" />
+            
           </div>
           <div className="space-y-4">
             {/* Content for UNIT 3 */}

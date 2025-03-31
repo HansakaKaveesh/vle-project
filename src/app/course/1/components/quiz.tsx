@@ -1,10 +1,10 @@
 "use client";
 import Link from 'next/link'
 import { useState, useEffect } from "react";
-import { Card } from "../../../components/ui/card";
-import { RadioGroup, RadioGroupItem } from "../../../components/ui/radio-group";
-import { Label } from "../../../components/ui/label";
-import { Button } from "../../../components/ui/button";
+import { Card } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { CheckCircle2, XCircle } from "lucide-react";
 
 const mcqQuestions = [
