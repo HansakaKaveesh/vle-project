@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost';
-$user = 'root'; // Default WAMP MySQL username
-$password = ''; // Default WAMP MySQL password
-$database = 'vle_database';
+$host = '34.55.193.253'; // Google Cloud SQL public IP
+$user = 'root'; // Database username (default: root)
+$password = ''; // Your database password
+$database = 'vle_database'; // Your database name
 
 $conn = new mysqli($host, $user, $password, $database);
 

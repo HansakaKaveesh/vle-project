@@ -19,7 +19,7 @@ export default function Navbar() {
   const [ialOpen, setIalOpen] = useState(false);
   const [igcseOpen, setIgcseOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   
 
   return (

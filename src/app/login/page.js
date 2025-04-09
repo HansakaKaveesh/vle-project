@@ -14,7 +14,7 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost/vle-api/login.php", credentials);
+            const response = await axios.post("https://vle-project-172202922309.us-central1.run.app/php-backend/login.php", credentials);
             alert(response.data.message);
             if (response.data.success) {
                 localStorage.setItem("user", JSON.stringify(response.data.user));
