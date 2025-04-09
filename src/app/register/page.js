@@ -50,7 +50,7 @@ export default function Register() {
     
     try {
       const response = await axios.post(
-        "http://localhost/vle-api/register.php",
+        "https://vle-project-172202922309.us-central1.run.app/php-backend/register.php",
         formData
       );
       
