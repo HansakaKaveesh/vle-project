@@ -1,6 +1,6 @@
 <?php
 // Allow requests from all origins
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: https://vle-project-172202922309.us-central1.run.app");
 
 // Allow specific headers
 header("Access-Control-Allow-Headers: Content-Type");
