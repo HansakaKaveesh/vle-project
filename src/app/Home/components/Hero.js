@@ -1,91 +1,118 @@
-"use client";
+'use client';
+
 import Image from 'next/image';
+import Link from 'next/link';
 import { ParallaxProvider } from 'react-scroll-parallax';
-import { motion } from 'framer-motion';
-import { ChevronRight, Star } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronRight, Star, Facebook, Twitter, Instagram, Youtube, Linkedin } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function Hero() {
+  const courses = [
+    'IGCSE ICT',
+    'IAL AS ICT',
+    'IAL AS2 ICT',
+    'IGCSE Computer Science',
+  ];
   const stats = [
     { number: '5K+', label: 'Students Enrolled' },
     { number: '98%', label: 'Pass Rate' },
     { number: '4.9/5', label: 'Student Rating' },
   ];
 
+  const [currentCourseIndex, setCurrentCourseIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentCourseIndex((prevIndex) => (prevIndex + 1) % courses.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative h-screen flex items-center justify-center text-center overflow-hidden">
-      {/* Background Image with Parallax */}
-      <ParallaxProvider speed={-20} className="absolute inset-0 -z-10">
-        <Image
-          src="/images/home/Hero bg.jpg"
-          alt="Hero Background"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
-          priority
-          className="scale-110"
-        />
+      
+      {/* Background with Parallax */}
+      <ParallaxProvider>
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src="/images/home/480421.jpg"
+            alt="Educational hero background"
+            fill
+            className="object-cover object-center scale-110"
+            priority
+          />
+        </div>
       </ParallaxProvider>
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-bl from-slate-900 via-blue-900 to-cyan-800 opacity-40" />
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-cyan-800 opacity-50" />
 
-      {/* Content */}
-      <div className="relative z-10 px-4 sm:px-6 lg:px-8">
+      {/* Hero Content */}
+      <div className="z-10 relative px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
+          transition={{ duration: 0.9 }}
+          className="space-y-6"
         >
-          {/* Badge */}
-          <div className="mb-6 inline-flex items-center gap-2 bg-yellow-400/20 backdrop-blur-sm px-4 py-2 rounded-full text-yellow-400 text-sm font-medium">
-            <Star className="w-4 h-4" aria-hidden="true" />
-            <span>Rated 4.9/5 by 2,500+ Students</span>
+          {/* Rating Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-400/20 text-yellow-300 rounded-full text-sm font-medium backdrop-blur-md animate-fade-in">
+            <Star className="h-4 w-4" />
+            Rated 4.9/5 by 2,500+ Students
           </div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight tracking-tight bg-gradient-to-r from-yellow-400 to-yellow-500 bg-clip-text text-transparent">
-            Master Modern ICT &<br />
-            <span className="text-white">Computer Science</span>
+          {/* Headline */}
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-tight">
+            <span className="block bg-gradient-to-r from-yellow-400 to-yellow-500 text-transparent bg-clip-text">
+              Master Modern ICT
+            </span>
+            <span className="block text-white">and Computer Science</span>
           </h1>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto"
-          >
-            Interactive courses with real-world projects, expert mentorship, and career-ready skills for the digital age.
-          </motion.p>
+          {/* 🔁 Rotating Course Text with Animated Background */}
+          <div className="mt-6 h-[52px] relative flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={courses[currentCourseIndex]}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.55, ease: 'easeInOut' }}
+                className="px-6 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg text-yellow-300 text-lg sm:text-xl md:text-2xl font-semibold"
+              >
+                {courses[currentCourseIndex]}
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
           {/* CTA Button */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-8"
-          >
-            <button 
-              className="group relative inline-flex items-center justify-center px-8 py-4 space-x-2 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
-              aria-label="Start Learning Free"
-            >
-              <span>Start Learning Free</span>
-              <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              <div className="absolute inset-0 border-2 border-yellow-400/30 rounded-full animate-ping-slow opacity-0 group-hover:opacity-100" />
-            </button>
+          <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.97 }}>
+            <Link href="/start-learning-free" passHref>
+              <button
+                className="relative inline-flex items-center justify-center px-8 py-4 bg-yellow-500 hover:bg-yellow-400 transition-all duration-300 rounded-full text-black font-semibold shadow-lg hover:shadow-xl group focus:outline-none focus-visible:ring-4 focus-visible:ring-yellow-300"
+                aria-label="Start Learning for Free"
+              >
+                <span>Start Learning Free</span>
+                <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <span className="absolute inset-0 rounded-full border-2 border-yellow-400/30 group-hover:opacity-100 opacity-0 animate-ping-slow pointer-events-none" />
+              </button>
+            </Link>
           </motion.div>
 
           {/* Stats */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 text-left max-w-4xl mx-auto"
+            transition={{ delay: 0.5 }}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 text-left max-w-4xl mx-auto"
           >
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                className="p-4 backdrop-blur-sm bg-white/5 rounded-xl"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type : "spring", stiffness: 300 }}
+                whileHover={{ scale: 1.04 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+                className="p-5 bg-white/5 backdrop-blur-md rounded-xl shadow-md hover:shadow-lg transition group"
               >
                 <div className="text-3xl font-bold text-yellow-400">{stat.number}</div>
                 <div className="mt-1 text-sm text-gray-300">{stat.label}</div>
@@ -93,12 +120,27 @@ export default function Hero() {
             ))}
           </motion.div>
         </motion.div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce-slow">
-          <ChevronRight className="w-8 h-8 text-yellow-400 transform rotate-90" aria-hidden="true" />
-        </div>
       </div>
+
+      {/* 🌐 Social Media Icons */}
+      <div className="absolute bottom-6 w-full flex justify-center gap-5 z-20">
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <Facebook className="h-6 w-6 text-white hover:text-blue-400 transition duration-200" />
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <Twitter className="h-6 w-6 text-white hover:text-sky-400 transition duration-200" />
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <Instagram className="h-6 w-6 text-white hover:text-pink-400 transition duration-200" />
+        </a>
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <Youtube className="h-6 w-6 text-white hover:text-red-500 transition duration-200" />
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <Linkedin className="h-6 w-6 text-white hover:text-blue-300 transition duration-200" />
+        </a>
+      </div>
+
     </section>
   );
 }

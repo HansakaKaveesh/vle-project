@@ -14,7 +14,7 @@ export default function Home() {
       <Hero />
       <AboutUsSection/>
       <TutoringSection/>
-      <OurModules />
+      {/*<OurModules />*/}
       <OurCourses />
       <MeetTeachersStudents />
       <Testimonials />

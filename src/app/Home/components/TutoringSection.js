@@ -1,13 +1,78 @@
 "use client";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const TutoringSection = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const router = useRouter();
+  const dropdownRef = useRef(null);
+
+  const subjects = [
+    { name: "IGCSE ICT", slug: "igcse-ict" },
+    { name: "IAL AS ICT", slug: "ial-as-ict" },
+    { name: "IAL AS2 ICT", slug: "ial-as2-ict" },
+    { name: "IGCSE Computer Science", slug: "igcse-computer-science" },
+  ];
+
+  const tutors = [
+    { name: "Ms. Madhara", slug: "ms-madhara" },
+    { name: "Ms. Johnson", slug: "ms-johnson" },
+    { name: "Dr. Khan", slug: "dr-khan" },
+  ];
+
+  const filteredSubjects = subjects.filter((subject) =>
+    subject.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredTutors = tutors.filter((tutor) =>
+    tutor.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const navigateToSubject = (slug) => {
+    router.push(`/subjects/${slug}`);
+    setIsDropdownVisible(false);
+    setSearchTerm("");
+  };
+
+  const navigateToTutor = (slug) => {
+    router.push(`/tutors/${slug}`);
+    setIsDropdownVisible(false);
+    setSearchTerm("");
+  };
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+    setIsDropdownVisible(true);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      if (filteredSubjects.length > 0) {
+        navigateToSubject(filteredSubjects[0].slug);
+      } else if (filteredTutors.length > 0) {
+        navigateToTutor(filteredTutors[0].slug);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownVisible(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <section className="relative bg-gradient-to-br from-purple-50 to-blue-50 py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-purple-50 to-blue-50 py-24 px-4 sm:px-6 lg:px-8 ">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         {/* Text Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
@@ -18,58 +83,98 @@ const TutoringSection = () => {
               Live Online Sessions
             </p>
           </div>
-          
+
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
-            Transform Your Learning with{" "}
+            Unlock Learning with{" "}
             <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              1-to-1 Tutoring
+              Expert Tutors
             </span>
           </h1>
-          
+
           <p className="text-xl text-gray-600 leading-relaxed">
-            Personalized sessions designed to unlock your full potential. Experience tailored learning with expert educators in real-time.
+            Personalized tutoring sessions for students and professionals to
+            excel with confidence.
           </p>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-4 mt-8">
-            <div className="p-4 bg-white rounded-xl shadow-lg">
-              <div className="text-3xl font-bold text-purple-600">400+</div>
-              <div className="text-gray-600 mt-1">Subjects Available</div>
-            </div>
-            <div className="p-4 bg-white rounded-xl shadow-lg">
-              <div className="text-3xl font-bold text-blue-600">98%</div>
-              <div className="text-gray-600 mt-1">Success Rate</div>
-            </div>
-          </div>
-
-          {/* Search Bar */}
-          <div className="relative mt-8">
+          {/* Search Input w/ Dropdown */}
+          <div className="relative mt-8" ref={dropdownRef}>
             <input
               type="text"
+              value={searchTerm}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
               placeholder="Search subjects or tutors..."
               className="w-full px-6 py-4 rounded-xl border-0 ring-2 ring-purple-200 focus:ring-4 focus:ring-purple-500 transition-all duration-300 placeholder-gray-400"
             />
-            <button className="absolute right-2 top-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-              Search
-            </button>
+
+            {/* 📌 Dropdown Suggestions */}
+            {searchTerm && isDropdownVisible && (
+              <div className="absolute z-50 mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-80 overflow-auto divide-y">
+                {/* Subjects Section */}
+                {filteredSubjects.length > 0 && (
+                  <div className="p-3">
+                    <p className="text-sm font-bold text-purple-600 mb-2">
+                      Subjects
+                    </p>
+                    {filteredSubjects.map((subject, index) => (
+                      <div
+                        key={`subject-${index}`}
+                        className="px-4 py-3 hover:bg-purple-100 cursor-pointer text-gray-800 font-medium transition rounded-lg"
+                        onClick={() => navigateToSubject(subject.slug)}
+                      >
+                        {subject.name}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Tutors Section */}
+                {filteredTutors.length > 0 && (
+                  <div className="p-3">
+                    <p className="text-sm font-bold text-blue-600 mb-2">
+                      Tutors
+                    </p>
+                    {filteredTutors.map((tutor, index) => (
+                      <div
+                        key={`tutor-${index}`}
+                        className="px-4 py-3 hover:bg-blue-100 cursor-pointer text-gray-800 font-medium transition rounded-lg"
+                        onClick={() => navigateToTutor(tutor.slug)}
+                      >
+                        {tutor.name}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {filteredSubjects.length === 0 && filteredTutors.length === 0 && (
+                  <div className="px-4 py-4 text-center text-gray-500">
+                    No results found
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
-          {/* Popular Tags */}
+          {/* Hashtags */}
           <div className="mt-8 flex flex-wrap gap-3">
-            {["Mathematics", "Computer Science", "Physics", "Languages", "Music", "Test Prep"].map((subject, index) => (
+            {subjects.map((subject, index) => (
               <motion.span
                 key={index}
                 whileHover={{ scale: 1.05 }}
+                onClick={() => {
+                  setSearchTerm(subject.name);
+                  setIsDropdownVisible(true);
+                }}
                 className="px-4 py-2 bg-white text-gray-700 rounded-full shadow-md text-sm font-medium cursor-pointer hover:bg-purple-50 hover:text-purple-700 transition-colors duration-200"
               >
-                #{subject}
+                #{subject.name}
               </motion.span>
             ))}
           </div>
         </motion.div>
 
         {/* Image Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
@@ -83,21 +188,20 @@ const TutoringSection = () => {
               height={600}
               className="object-cover w-full h-auto group-hover:scale-105 transition-transform duration-500"
             />
-            
-            {/* Floating Badge */}
+            {/* Badge */}
             <div className="absolute bottom-8 left-8 bg-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2">
-              <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse"></div>
+              <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse" />
               <span className="font-semibold text-gray-700">Live Session</span>
             </div>
           </div>
 
-          {/* Decorative Elements */}
+          {/* Decorative circles */}
           <div className="absolute -top-16 -left-16 w-64 h-64 bg-purple-200/40 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-24 -right-16 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl"></div>
         </motion.div>
       </div>
 
-      {/* Background Pattern */}
+      {/* Background Grid */}
       <div className="absolute inset-0 opacity-10 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]">
         <div className="absolute inset-0 bg-[url(/grid.svg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
       </div>
