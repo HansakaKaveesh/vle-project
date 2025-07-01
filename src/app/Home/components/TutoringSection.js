@@ -1,26 +1,27 @@
-"use client";
-import React, { useState, useRef, useEffect } from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+'use client';
+
+import React, { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 const TutoringSection = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const router = useRouter();
   const dropdownRef = useRef(null);
 
   const subjects = [
-    { name: "IGCSE ICT", slug: "igcse-ict" },
-    { name: "IAL AS ICT", slug: "ial-as-ict" },
-    { name: "IAL AS2 ICT", slug: "ial-as2-ict" },
-    { name: "IGCSE Computer Science", slug: "igcse-computer-science" },
+    { name: 'IGCSE ICT', slug: 'igcse-ict' },
+    { name: 'IAL AS ICT', slug: 'ial-as-ict' },
+    { name: 'IAL AS2 ICT', slug: 'ial-as2-ict' },
+    { name: 'IGCSE Computer Science', slug: 'igcse-computer-science' },
   ];
 
   const tutors = [
-    { name: "Ms. Madhara", slug: "ms-madhara" },
-    { name: "Ms. Johnson", slug: "ms-johnson" },
-    { name: "Dr. Khan", slug: "dr-khan" },
+    { name: 'Ms. Madhara', slug: 'ms-madhara' },
+    { name: 'Ms. Johnson', slug: 'ms-johnson' },
+    { name: 'Dr. Khan', slug: 'dr-khan' },
   ];
 
   const filteredSubjects = subjects.filter((subject) =>
@@ -34,13 +35,13 @@ const TutoringSection = () => {
   const navigateToSubject = (slug) => {
     router.push(`/subjects/${slug}`);
     setIsDropdownVisible(false);
-    setSearchTerm("");
+    setSearchTerm('');
   };
 
   const navigateToTutor = (slug) => {
     router.push(`/tutors/${slug}`);
     setIsDropdownVisible(false);
-    setSearchTerm("");
+    setSearchTerm('');
   };
 
   const handleInputChange = (e) => {
@@ -49,7 +50,7 @@ const TutoringSection = () => {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       if (filteredSubjects.length > 0) {
         navigateToSubject(filteredSubjects[0].slug);
       } else if (filteredTutors.length > 0) {
@@ -64,53 +65,50 @@ const TutoringSection = () => {
         setIsDropdownVisible(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   return (
-    <section className="relative bg-gradient-to-br from-purple-50 to-blue-50 py-24 px-4 sm:px-6 lg:px-8 ">
+    <section className="relative bg-gradient-to-br from-purple-50 to-blue-50 py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-        {/* Text Section */}
+        {/* Text Content */}
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="space-y-8 relative z-10"
+          className="space-y-8"
         >
-          <div className="inline-block bg-purple-100/50 px-6 py-2 rounded-full mb-6">
-            <p className="text-sm text-purple-700 font-semibold uppercase tracking-wider">
+          <div className="inline-block bg-purple-100/50 px-6 py-2 rounded-full mb-4">
+            <p className="text-sm sm:text-base text-purple-700 font-semibold uppercase tracking-wider">
               Live Online Sessions
             </p>
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
-            Unlock Learning with{" "}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
+            Unlock Learning with{' '}
             <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
               Expert Tutors
             </span>
           </h1>
 
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
             Personalized tutoring sessions for students and professionals to
             excel with confidence.
           </p>
 
-          {/* Search Input w/ Dropdown */}
-          <div className="relative mt-8" ref={dropdownRef}>
+          {/* Search Input */}
+          <div className="relative mt-6" ref={dropdownRef}>
             <input
               type="text"
               value={searchTerm}
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
               placeholder="Search subjects or tutors..."
-              className="w-full px-6 py-4 rounded-xl border-0 ring-2 ring-purple-200 focus:ring-4 focus:ring-purple-500 transition-all duration-300 placeholder-gray-400"
+              className="w-full px-5 py-3 sm:px-6 sm:py-4 rounded-xl border-0 ring-2 ring-purple-200 focus:ring-4 focus:ring-purple-500 placeholder-gray-400 text-sm sm:text-base transition-all duration-300"
             />
-
-            {/* 📌 Dropdown Suggestions */}
             {searchTerm && isDropdownVisible && (
               <div className="absolute z-50 mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-80 overflow-auto divide-y">
-                {/* Subjects Section */}
                 {filteredSubjects.length > 0 && (
                   <div className="p-3">
                     <p className="text-sm font-bold text-purple-600 mb-2">
@@ -127,8 +125,6 @@ const TutoringSection = () => {
                     ))}
                   </div>
                 )}
-
-                {/* Tutors Section */}
                 {filteredTutors.length > 0 && (
                   <div className="p-3">
                     <p className="text-sm font-bold text-blue-600 mb-2">
@@ -145,7 +141,6 @@ const TutoringSection = () => {
                     ))}
                   </div>
                 )}
-
                 {filteredSubjects.length === 0 && filteredTutors.length === 0 && (
                   <div className="px-4 py-4 text-center text-gray-500">
                     No results found
@@ -156,7 +151,7 @@ const TutoringSection = () => {
           </div>
 
           {/* Hashtags */}
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3">
             {subjects.map((subject, index) => (
               <motion.span
                 key={index}
@@ -175,34 +170,33 @@ const TutoringSection = () => {
 
         {/* Image Section */}
         <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="relative"
         >
-          <div className="relative bg-gradient-to-tr from-purple-100 to-blue-100 rounded-[4rem] overflow-hidden shadow-2xl transform hover:rotate-1 hover:scale-[1.02] transition-all duration-500 group">
+          <div className="relative bg-gradient-to-tr from-purple-100 to-blue-100 rounded-[3rem] overflow-hidden shadow-2xl transform hover:rotate-1 hover:scale-[1.02] transition-all duration-500 group">
             <Image
               src="/Group-73.jpg"
               alt="Tutoring Session"
               width={600}
               height={600}
-              className="object-cover w-full h-auto group-hover:scale-105 transition-transform duration-500"
+              className="object-cover w-full h-auto group-hover:scale-105 transition-transform duration-500 animate-fade-in"
             />
-            {/* Badge */}
-            <div className="absolute bottom-8 left-8 bg-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2">
+            <div className="absolute bottom-6 left-6 bg-white px-5 py-2 rounded-full shadow-lg flex items-center gap-2">
               <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse" />
-              <span className="font-semibold text-gray-700">Live Session</span>
+              <span className="font-semibold text-gray-700 text-sm">Live Session</span>
             </div>
           </div>
 
-          {/* Decorative circles */}
-          <div className="absolute -top-16 -left-16 w-64 h-64 bg-purple-200/40 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-24 -right-16 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl"></div>
+          {/* Background Circles */}
+          <div className="absolute -top-16 -left-16 w-56 h-56 bg-purple-200/40 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-24 -right-16 w-64 h-64 bg-blue-200/30 rounded-full blur-3xl"></div>
         </motion.div>
       </div>
 
-      {/* Background Grid */}
-      <div className="absolute inset-0 opacity-10 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]">
+      {/* Subtle Background Grid */}
+      <div className="absolute inset-0 opacity-10 [mask-image:radial-gradient(ellipse_at_center,white,transparent)] pointer-events-none">
         <div className="absolute inset-0 bg-[url(/grid.svg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
       </div>
     </section>

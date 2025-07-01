@@ -60,7 +60,7 @@ export default function Home() {
                 title: "IGCSE ICT",
                 description:
                   "Comprehensive IGCSE ICT course covering systems, databases, communication, and application skills.",
-                href: "/courses/igcse-ict",
+                href: "/courses/igcse/ict",
                 photo:
                   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFRObkO8H_uYDj0uuGJ1vlSPl4i-qFHG92YQ&s",
               },
@@ -84,7 +84,7 @@ export default function Home() {
                 title: "IGCSE Computer Science",
                 description:
                   "Master algorithms, programming, and problem-solving with our in-depth IGCSE Computer Science course.",
-                href: "/courses/igcse-computer-science",
+                href: "courses/igcse/computer-science",
                 photo:
                   "https://www.igcsebookshop.co.uk/wp-content/uploads/2017/04/9781471809309-502x380.jpg",
               },

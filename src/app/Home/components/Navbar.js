@@ -13,14 +13,14 @@ import {
 export default function Navbar() {
   const [coursesOpen, setCoursesOpen] = useState(false);
   const [ictOpen, setIctOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Handle scroll to toggle blur class
+  // Scroll effect for blur background
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -37,9 +37,8 @@ export default function Navbar() {
         scrolled ? "bg-blue-600/80 backdrop-blur-md" : "bg-blue-600/0"
       }`}
     >
-      {/* Main container */}
       <div className="relative flex items-center justify-between max-w-7xl mx-auto">
-        {/* Logo on the left */}
+        {/* Logo */}
         <Link
           href="/"
           className="text-2xl md:text-3xl font-bold tracking-tight hover:scale-105 transition-transform duration-200"
@@ -47,9 +46,37 @@ export default function Navbar() {
           Synap<span className="text-yellow-300">Z</span>
         </Link>
 
-        {/* Centered nav menu using absolute + transform */}
-        <div className="absolute left-1/2 transform -translate-x-1/2">
-          <ul className="hidden md:flex items-center space-x-6 font-medium text-md">
+        {/* Hamburger for mobile */}
+        <div className="md:hidden flex items-center">
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="text-white focus:outline-none"
+            aria-label="Toggle Menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={
+                  mobileMenuOpen
+                    ? "M6 18L18 6M6 6l12 12"
+                    : "M4 6h16M4 12h16M4 18h16"
+                }
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Center navigation (desktop) */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 hidden md:flex">
+          <ul className="flex items-center space-x-6 font-medium text-md">
             <li>
               <Link href="/" className="hover:text-yellow-300 transition">
                 Home
@@ -64,16 +91,14 @@ export default function Navbar() {
             {/* Courses Dropdown */}
             <li
               className="relative"
-              onMouseEnter={() => setCoursesOpen(true)}
-              onMouseLeave={() => {
-                setCoursesOpen(false);
-                setIctOpen(false);
-              }}
+              onMouseEnter={() => window.innerWidth >= 768 && setCoursesOpen(true)}
+              onMouseLeave={() => window.innerWidth >= 768 && setCoursesOpen(false)}
             >
               <button
                 className="hover:text-yellow-300 flex items-center transition"
                 aria-haspopup="true"
                 aria-expanded={coursesOpen}
+                onClick={() => setCoursesOpen(!coursesOpen)}
               >
                 Courses <FaChevronDown className="ml-1 text-sm" />
               </button>
@@ -91,7 +116,7 @@ export default function Navbar() {
                         <FaLaptopCode className="mr-2 text-purple-500" />
                         ICT
                       </span>
-                      <FaChevronDown className="ml-2 transform group-hover:rotate-90 transition" />
+                      <FaChevronDown className="ml-2 group-hover:rotate-90 transition-transform" />
                     </button>
 
                     {ictOpen && (
@@ -113,18 +138,12 @@ export default function Navbar() {
                           </Link>
                         </li>
                         <li>
-                          <Link
-                            href="/courses/ial/as-ict"
-                            className={dropdownItemClasses}
-                          >
+                          <Link href="/courses/ial/as-ict" className={dropdownItemClasses}>
                             IAL AS ICT
                           </Link>
                         </li>
                         <li>
-                          <Link
-                            href="/courses/ial/as2-ict"
-                            className={dropdownItemClasses}
-                          >
+                          <Link href="/courses/ial/as2-ict" className={dropdownItemClasses}>
                             IAL AS2 ICT
                           </Link>
                         </li>
@@ -140,7 +159,6 @@ export default function Navbar() {
                 Tutors
               </Link>
             </li>
-
             <li>
               <Link href="/contact" className="hover:text-yellow-300 transition">
                 Contact
@@ -149,7 +167,7 @@ export default function Navbar() {
           </ul>
         </div>
 
-        {/* Auth (Sign In, Register, Dashboard) on the right */}
+        {/* Right Auth Section (Desktop) */}
         <div className="hidden md:flex items-center space-x-3">
           <Link
             href="/login"
@@ -158,7 +176,6 @@ export default function Navbar() {
             <FaSignInAlt className="mr-2 text-base group-hover:translate-x-1 transition-transform" />
             Sign In
           </Link>
-
           <Link
             href="/register"
             className="flex items-center bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-md shadow hover:scale-105 transition-all text-sm font-semibold group"
@@ -166,8 +183,6 @@ export default function Navbar() {
             <FaUserPlus className="mr-2 text-base group-hover:translate-x-1 transition-transform" />
             Register
           </Link>
-
-          {/* Dashboard Icon with notification */}
           <div className="relative">
             <Link
               href="/dashboard"
@@ -182,6 +197,67 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden mt-4 space-y-2 bg-white text-blue-800 rounded-lg shadow-lg p-4 animate-fade-in">
+          <Link href="/" className="block px-2 py-2 hover:text-yellow-500">
+            Home
+          </Link>
+          <Link href="/about-us" className="block px-2 py-2 hover:text-yellow-500">
+            About Us
+          </Link>
+
+          <details className="group">
+            <summary className="flex justify-between items-center px-2 py-2 hover:text-yellow-500 cursor-pointer">
+              Courses <FaChevronDown />
+            </summary>
+            <div className="pl-4 space-y-2 mt-1">
+              <details className="group">
+                <summary className="flex justify-between items-center px-2 py-2 hover:text-yellow-500 cursor-pointer">
+                  ICT <FaChevronDown />
+                </summary>
+                <div className="pl-4 mt-1 space-y-1">
+                  <Link href="/courses/igcse/ict" className="block hover:text-blue-500">
+                    IGCSE ICT
+                  </Link>
+                  <Link
+                    href="/courses/igcse/computer-science"
+                    className="block hover:text-blue-500"
+                  >
+                    IGCSE Computer Science
+                  </Link>
+                  <Link href="/courses/ial/as-ict" className="block hover:text-blue-500">
+                    IAL AS ICT
+                  </Link>
+                  <Link href="/courses/ial/as2-ict" className="block hover:text-blue-500">
+                    IAL AS2 ICT
+                  </Link>
+                </div>
+              </details>
+            </div>
+          </details>
+
+          <Link href="/tutors" className="block px-2 py-2 hover:text-yellow-500">
+            Tutors
+          </Link>
+          <Link href="/contact" className="block px-2 py-2 hover:text-yellow-500">
+            Contact
+          </Link>
+
+          <hr className="my-2" />
+
+          <Link href="/login" className="block px-2 py-2 hover:text-yellow-500">
+            Sign In
+          </Link>
+          <Link href="/register" className="block px-2 py-2 hover:text-yellow-500">
+            Register
+          </Link>
+          <Link href="/dashboard" className="block px-2 py-2 hover:text-yellow-500">
+            Dashboard
+          </Link>
+        </div>
+      )}
     </nav>
   );
 }
