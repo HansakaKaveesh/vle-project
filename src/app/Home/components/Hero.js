@@ -22,6 +22,7 @@ export default function Hero() {
     'IAL AS2 ICT',
     'IGCSE Computer Science',
   ];
+
   const stats = [
     { number: '5K+', label: 'Students Enrolled' },
     { number: '98%', label: 'Pass Rate' },
@@ -29,28 +30,51 @@ export default function Hero() {
   ];
 
   const [currentCourseIndex, setCurrentCourseIndex] = useState(0);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
+  // Detects user preference for reduced motion
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReducedMotion(mediaQuery.matches);
+  }, []);
+
+  // Rotating course titles
+  useEffect(() => {
+    if (reducedMotion) return;
+
     const interval = setInterval(() => {
       setCurrentCourseIndex((prevIndex) => (prevIndex + 1) % courses.length);
     }, 3500);
     return () => clearInterval(interval);
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center text-center overflow-hidden px-4 sm:px-8 lg:px-12 py-16">
-      {/* Background with Parallax */}
-      <ParallaxProvider>
+      {/* Background Image */}
+      {!reducedMotion && (
+        <ParallaxProvider>
+          <div className="absolute inset-0 -z-10">
+            <Image
+              src="/images/home/480421.jpg"
+              alt="Educational hero background"
+              fill
+              className="object-cover object-center scale-100 md:scale-110"
+              priority
+            />
+          </div>
+        </ParallaxProvider>
+      )}
+      {reducedMotion && (
         <div className="absolute inset-0 -z-10">
           <Image
             src="/images/home/480421.jpg"
             alt="Educational hero background"
             fill
-            className="object-cover object-center scale-100 md:scale-110"
+            className="object-cover object-center"
             priority
           />
         </div>
-      </ParallaxProvider>
+      )}
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-cyan-800 opacity-50" />
@@ -60,11 +84,11 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
+          transition={{ duration: reducedMotion ? 0 : 0.9 }}
           className="space-y-6"
         >
           {/* Rating Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-400/20 text-yellow-300 rounded-full text-sm font-medium backdrop-blur-md animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-400/20 text-yellow-300 rounded-full text-sm font-medium backdrop-blur-md">
             <Star className="h-4 w-4" />
             Rated 4.9/5 by 2,500+ Students
           </div>
@@ -77,24 +101,33 @@ export default function Hero() {
             <span className="block text-white">and Computer Science</span>
           </h1>
 
-          {/* Rotating Course Text */}
+          {/* Rotating Course Title */}
           <div className="mt-6 h-[52px] relative flex items-center justify-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={courses[currentCourseIndex]}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.55, ease: 'easeInOut' }}
-                className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg text-yellow-300 text-base sm:text-lg md:text-xl lg:text-2xl font-semibold"
-              >
-                {courses[currentCourseIndex]}
-              </motion.div>
-            </AnimatePresence>
+            {!reducedMotion ? (
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={courses[currentCourseIndex]}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.55, ease: 'easeInOut' }}
+                  className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg text-yellow-300 text-base sm:text-lg md:text-xl lg:text-2xl font-semibold"
+                >
+                  {courses[currentCourseIndex]}
+                </motion.div>
+              </AnimatePresence>
+            ) : (
+              <div className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg text-yellow-300 text-base sm:text-lg md:text-xl lg:text-2xl font-semibold">
+                {courses[0]}
+              </div>
+            )}
           </div>
 
-          {/* CTA Button */}
-          <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.97 }}>
+          {/* Call-To-Action Button */}
+          <motion.div
+            whileHover={reducedMotion ? {} : { scale: 1.06 }}
+            whileTap={reducedMotion ? {} : { scale: 0.97 }}
+          >
             <Link href="/start-learning-free" passHref>
               <button
                 className="relative inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-yellow-500 hover:bg-yellow-400 transition-all duration-300 rounded-full text-black font-semibold shadow-lg hover:shadow-xl group focus:outline-none focus-visible:ring-4 focus-visible:ring-yellow-300 text-sm sm:text-base"
@@ -112,16 +145,18 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 text-left max-w-4xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 text-center max-w-2xl mx-auto"
           >
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                whileHover={{ scale: 1.04 }}
+                whileHover={reducedMotion ? {} : { scale: 1.04 }}
                 transition={{ type: 'spring', stiffness: 300 }}
                 className="p-5 bg-white/5 backdrop-blur-md rounded-xl shadow-md hover:shadow-lg transition group"
               >
-                <div className="text-3xl font-bold text-yellow-400">{stat.number}</div>
+                <div className="text-3xl font-bold text-yellow-400">
+                  {stat.number}
+                </div>
                 <div className="mt-1 text-sm text-gray-300">{stat.label}</div>
               </motion.div>
             ))}
@@ -130,22 +165,25 @@ export default function Hero() {
       </div>
 
       {/* Social Media Icons */}
-      <div className="absolute bottom-4 w-full flex justify-center flex-wrap gap-4 sm:gap-5 z-20 px-4">
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <Facebook className="h-7 w-7 text-white hover:text-blue-400 transition duration-200" />
-        </a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-          <Twitter className="h-7 w-7 text-white hover:text-sky-400 transition duration-200" />
-        </a>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <Instagram className="h-7 w-7 text-white hover:text-pink-400 transition duration-200" />
-        </a>
-        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-          <Youtube className="h-7 w-7 text-white hover:text-red-500 transition duration-200" />
-        </a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <Linkedin className="h-7 w-7 text-white hover:text-blue-300 transition duration-200" />
-        </a>
+      <div className="absolute bottom-6 w-full flex justify-center flex-wrap gap-4 sm:gap-5 z-20 px-4">
+        {[
+          { icon: Facebook, href: 'https://facebook.com', label: 'Facebook', color: 'hover:text-blue-400' },
+          { icon: Twitter, href: 'https://twitter.com', label: 'Twitter', color: 'hover:text-sky-400' },
+          { icon: Instagram, href: 'https://instagram.com', label: 'Instagram', color: 'hover:text-pink-400' },
+          { icon: Youtube, href: 'https://youtube.com', label: 'Youtube', color: 'hover:text-red-500' },
+          { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn', color: 'hover:text-blue-300' },
+        ].map(({ icon: Icon, href, label, color }, i) => (
+          <a
+            key={i}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            className={`p-2 rounded-full bg-white/10 hover:bg-white/20 transition duration-200 ${color}`}
+          >
+            <Icon className="h-6 w-6 text-white" />
+          </a>
+        ))}
       </div>
     </section>
   );

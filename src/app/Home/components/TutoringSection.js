@@ -8,8 +8,15 @@ import { useRouter } from 'next/navigation';
 const TutoringSection = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
   const router = useRouter();
   const dropdownRef = useRef(null);
+
+  // Detect reduced motion preference
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReduceMotion(mediaQuery.matches);
+  }, []);
 
   const subjects = [
     { name: 'IGCSE ICT', slug: 'igcse-ict' },
@@ -27,7 +34,6 @@ const TutoringSection = () => {
   const filteredSubjects = subjects.filter((subject) =>
     subject.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   const filteredTutors = tutors.filter((tutor) =>
     tutor.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -44,21 +50,6 @@ const TutoringSection = () => {
     setSearchTerm('');
   };
 
-  const handleInputChange = (e) => {
-    setSearchTerm(e.target.value);
-    setIsDropdownVisible(true);
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      if (filteredSubjects.length > 0) {
-        navigateToSubject(filteredSubjects[0].slug);
-      } else if (filteredTutors.length > 0) {
-        navigateToTutor(filteredTutors[0].slug);
-      }
-    }
-  };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -72,10 +63,11 @@ const TutoringSection = () => {
   return (
     <section className="relative bg-gradient-to-br from-purple-50 to-blue-50 py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-        {/* Text Content */}
+
+        {/* LEFT: Text */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? {} : { opacity: 0, y: 30 }}
+          whileInView={reduceMotion ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="space-y-8"
         >
@@ -97,26 +89,47 @@ const TutoringSection = () => {
             excel with confidence.
           </p>
 
-          {/* Search Input */}
+          {/* SEARCH */}
           <div className="relative mt-6" ref={dropdownRef}>
+            <label htmlFor="search" className="sr-only">Search subjects or tutors</label>
             <input
+              id="search"
               type="text"
               value={searchTerm}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setIsDropdownVisible(true);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  if (filteredSubjects.length > 0) {
+                    navigateToSubject(filteredSubjects[0].slug);
+                  } else if (filteredTutors.length > 0) {
+                    navigateToTutor(filteredTutors[0].slug);
+                  }
+                }
+              }}
               placeholder="Search subjects or tutors..."
               className="w-full px-5 py-3 sm:px-6 sm:py-4 rounded-xl border-0 ring-2 ring-purple-200 focus:ring-4 focus:ring-purple-500 placeholder-gray-400 text-sm sm:text-base transition-all duration-300"
+              aria-haspopup="listbox"
+              aria-expanded={isDropdownVisible}
+              aria-label="Search subjects or tutors"
             />
+
+            {/* DROPDOWN */}
             {searchTerm && isDropdownVisible && (
-              <div className="absolute z-50 mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-80 overflow-auto divide-y">
+              <div
+                role="listbox"
+                aria-label="Search Results"
+                className="absolute z-50 mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-80 overflow-auto divide-y"
+              >
                 {filteredSubjects.length > 0 && (
                   <div className="p-3">
-                    <p className="text-sm font-bold text-purple-600 mb-2">
-                      Subjects
-                    </p>
+                    <p className="text-sm font-bold text-purple-600 mb-2">Subjects</p>
                     {filteredSubjects.map((subject, index) => (
                       <div
                         key={`subject-${index}`}
+                        role="option"
                         className="px-4 py-3 hover:bg-purple-100 cursor-pointer text-gray-800 font-medium transition rounded-lg"
                         onClick={() => navigateToSubject(subject.slug)}
                       >
@@ -127,12 +140,11 @@ const TutoringSection = () => {
                 )}
                 {filteredTutors.length > 0 && (
                   <div className="p-3">
-                    <p className="text-sm font-bold text-blue-600 mb-2">
-                      Tutors
-                    </p>
+                    <p className="text-sm font-bold text-blue-600 mb-2">Tutors</p>
                     {filteredTutors.map((tutor, index) => (
                       <div
                         key={`tutor-${index}`}
+                        role="option"
                         className="px-4 py-3 hover:bg-blue-100 cursor-pointer text-gray-800 font-medium transition rounded-lg"
                         onClick={() => navigateToTutor(tutor.slug)}
                       >
@@ -143,19 +155,19 @@ const TutoringSection = () => {
                 )}
                 {filteredSubjects.length === 0 && filteredTutors.length === 0 && (
                   <div className="px-4 py-4 text-center text-gray-500">
-                    No results found
+                    No results found.
                   </div>
                 )}
               </div>
             )}
           </div>
 
-          {/* Hashtags */}
+          {/* Tags */}
           <div className="mt-6 flex flex-wrap gap-3">
             {subjects.map((subject, index) => (
               <motion.span
                 key={index}
-                whileHover={{ scale: 1.05 }}
+                whileHover={reduceMotion ? {} : { scale: 1.05 }}
                 onClick={() => {
                   setSearchTerm(subject.name);
                   setIsDropdownVisible(true);
@@ -168,36 +180,36 @@ const TutoringSection = () => {
           </div>
         </motion.div>
 
-        {/* Image Section */}
+        {/* RIGHT: Image */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? {} : { opacity: 0, y: 30 }}
+          whileInView={reduceMotion ? {} : { opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="relative"
         >
           <div className="relative bg-gradient-to-tr from-purple-100 to-blue-100 rounded-[3rem] overflow-hidden shadow-2xl transform hover:rotate-1 hover:scale-[1.02] transition-all duration-500 group">
             <Image
               src="/Group-73.jpg"
-              alt="Tutoring Session"
+              alt="Live Tutoring Session"
               width={600}
               height={600}
-              className="object-cover w-full h-auto group-hover:scale-105 transition-transform duration-500 animate-fade-in"
+              className="object-cover w-full h-auto group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute bottom-6 left-6 bg-white px-5 py-2 rounded-full shadow-lg flex items-center gap-2">
-              <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse" />
+              <div className="h-3 w-3 bg-green-400 rounded-full animate-pulse"></div>
               <span className="font-semibold text-gray-700 text-sm">Live Session</span>
             </div>
           </div>
 
-          {/* Background Circles */}
+          {/* Background circles */}
           <div className="absolute -top-16 -left-16 w-56 h-56 bg-purple-200/40 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-24 -right-16 w-64 h-64 bg-blue-200/30 rounded-full blur-3xl"></div>
         </motion.div>
       </div>
 
-      {/* Subtle Background Grid */}
+      {/* Subtle background grid pattern */}
       <div className="absolute inset-0 opacity-10 [mask-image:radial-gradient(ellipse_at_center,white,transparent)] pointer-events-none">
-        <div className="absolute inset-0 bg-[url(/grid.svg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+        <div className="absolute inset-0 bg-[url(/grid.svg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
       </div>
     </section>
   );
