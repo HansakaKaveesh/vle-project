@@ -26,8 +26,9 @@ export default function Login() {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50">
-        <div className="w-full max-w-md bg-white shadow-xl rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
+        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 to-indigo-300">
+          
+        <div className="w-full max-w-md bg-white shadow-xl rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl mt-16">
           {/* Form Header */}
           <div className="bg-gradient-to-r from-indigo-600 to-blue-500 px-6 py-4">
             <h2 className="text-3xl font-bold text-center text-white">Welcome Back! 👋</h2>

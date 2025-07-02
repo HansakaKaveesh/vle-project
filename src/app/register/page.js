@@ -67,8 +67,8 @@ export default function Register() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-      <div className="w-full max-w-md bg-white shadow-xl rounded-2xl overflow-hidden mx-4 transition-all duration-300 hover:shadow-2xl">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 to-indigo-300">
+      <div className="w-full max-w-md bg-white shadow-xl rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl mt-24 mb-10 ">
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-6 text-center">
           <h1 className="text-3xl font-bold text-white mb-2">Create Account</h1>
           <p className="text-blue-100">Join our learning community today</p>
